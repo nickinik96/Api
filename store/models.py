@@ -1,4 +1,6 @@
 from django.db import models
+class Collection(models.Model):
+    title = models.CharField(max_length = 255) 
 
 class Product (models.Model):
     title = models.CharField(max_length = 255) 
@@ -6,6 +8,7 @@ class Product (models.Model):
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now = True)
+    Collection = models.ForeignKey(Collection,on_delete=models.PROTECT)
 
 class Customer (models.Model):
     MEMEBERSHIP_BRONZE = 'B'
@@ -32,5 +35,12 @@ class Order(models.Model):
         (STATUS_COMPLETE,'Complete'),
         (STATUS_FAILED,'Failed') 
         ]
-    placed_at = models.DateTimeField(auto_now_add=True)
+    placed_at = models.DateTimeField(auto_now_add = True)
     placed_status = models.CharField(max_length=1, default=PAYMENT_STATUS_PENDING)
+
+class Address(models.Model): 
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    #customer = models.OneToOneField(Customer,on_delete=models.CASCADE,primary_key = True)
+    Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+
