@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'store',
     'tags',
+    'like',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,15 @@ WSGI_APPLICATION = 'a.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'Mypocess',
+        'USER': '<database username>',
+        'PASSWORD': '<database password>',
+        'HOST': '<database host>',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
     }
 }
 
